@@ -1,4 +1,7 @@
-# Yolo v4, v3 and v2 for Windows and Linux
+# Yolo v4, v3 and v2 for Windows and Linux FORK for colab (free tier)
+- fork with minor modifications for personal project use, mainly inside of google colab (free tier):
+  - Enabling cudaNN, GPU and openCV by default
+  - modified detector.c to save weights every 25 epochs 
 
 ## (neural networks for object detection)
 
