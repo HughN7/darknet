@@ -299,7 +299,7 @@ void train_detector(char *datacfg, char *cfgfile, char *weightfile, int *gpus, i
         //i = get_current_batch(net);
 
         int calc_map_for_each = 4 * train_images_num / (net.batch * net.subdivisions);  // calculate mAP for each 4 Epochs
-        calc_map_for_each = fmax(calc_map_for_each, 100);
+        calc_map_for_each = fmax(calc_map_for_each, 50);
         int next_map_calc = iter_map + calc_map_for_each;
         next_map_calc = fmax(next_map_calc, net.burn_in);
         //next_map_calc = fmax(next_map_calc, 400);
@@ -383,7 +383,7 @@ void train_detector(char *datacfg, char *cfgfile, char *weightfile, int *gpus, i
         //if (i % 1000 == 0 || (i < 1000 && i % 100 == 0)) {
         //if (i % 100 == 0) {
         if ((iteration >= (iter_save + 10000) || iteration % 10000 == 0) ||
-            (iteration >= (iter_save + 1000) || iteration % 1000 == 0) && net.max_batches < 10000)
+            (iteration >= (iter_save + 50) || iteration % 50 == 0) && net.max_batches < 10000)
         {
             iter_save = iteration;
 #ifdef GPU
@@ -394,7 +394,7 @@ void train_detector(char *datacfg, char *cfgfile, char *weightfile, int *gpus, i
             save_weights(net, buff);
         }
 
-        if (iteration >= (iter_save_last + 100) || (iteration % 100 == 0 && iteration > 1)) {
+        if (iteration >= (iter_save_last + 50) || (iteration % 50 == 0 && iteration > 1)) {
             iter_save_last = iteration;
 #ifdef GPU
             if (ngpus != 1) sync_nets(nets, ngpus, 0);
